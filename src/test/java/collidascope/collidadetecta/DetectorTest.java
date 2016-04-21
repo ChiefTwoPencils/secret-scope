@@ -50,4 +50,19 @@ public class DetectorTest {
             Assert.assertSame(expected, actual);
         }
     }
+
+    @Test
+    public void testDetectCollision() {
+        detector.addDetectors(getMapOfKeysAndFunctions(keys, functions, MANY));
+        Assert.assertSame(
+                functions.get(0).apply(null, null),
+                detector.detectCollision(null, null, keys.get(0))
+        );
+    }
+
+    @Test
+    public void testDetectCollisionWithBadKey() {
+        detector.addDetectors(getMapOfKeysAndFunctions(keys, functions, MANY));
+        Assert.assertFalse(detector.detectCollision(null, null, "BadKey"));
+    }
 }

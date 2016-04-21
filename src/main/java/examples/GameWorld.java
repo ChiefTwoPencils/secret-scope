@@ -2,9 +2,11 @@ package examples;
 
 import collidascope.Collider;
 import collidascope.Collision;
-import collidascope.ICollider;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Simple game world to use in a game.
@@ -72,16 +74,11 @@ public class GameWorld {
      * Checks the current game objects for collisions.
      */
     private void checkCollisions() {
-        Iterator<GameObject> friends = gameObjects.get(GameObjectType.FRIEND).iterator();
-        Iterator<GameObject> enemies = gameObjects.get(GameObjectType.ENEMY).iterator();
-        while (friends.hasNext()) {
-            ICollider one = friends.next();
-            while (enemies.hasNext()) {
-                ICollider theOther = enemies.next();
-                if (collider.detectedCollision(one, theOther)) {
-                    collider.trackCollision(new Collision(one, theOther, 0));
-                }
-            }
+        for (GameObject one : gameObjects.get(GameObjectType.FRIEND)) {
+            gameObjects.get(GameObjectType.ENEMY)
+                    .stream()
+                    .filter(theOther -> collider.detectedCollision(one, theOther))
+                    .forEach(theOther -> collider.trackCollision(new Collision(one, theOther, 0)));
         }
     }
 }
