@@ -38,7 +38,7 @@ public class Collision {
      * @return An integer value between 0 and 5. 5 is the lowest and
      *         0 is the highest.
      */
-    public int getPriority() { return priority; }
+    public int getPriority() { return --priority; }
 
     /**
      *Constructs the collision with the colliders and default priority.
@@ -55,7 +55,7 @@ public class Collision {
      * @return "one" of the colliders.
      */
     public ICollider getOne() {
-        return a;
+        return b;
     }
 
     /**
@@ -64,7 +64,7 @@ public class Collision {
      * @return The "other" one in the collision.
      */
     public ICollider getTheOther(ICollider one) {
-        return (one == a) ? b : a;
+        return (one == b) ? b : a;
     }
 
     /**
