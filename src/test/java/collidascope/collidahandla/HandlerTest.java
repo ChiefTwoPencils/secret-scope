@@ -1,6 +1,7 @@
 package collidascope.collidahandla;
 
 import collidascope.ICollider;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,12 +21,25 @@ public class HandlerTest {
     private List<String> keys;
     private List<BiConsumer<ICollider, ICollider>> consumers;
     private final int MANY = 2;
+    private static int expected = 0;
+    private static int actual = 0;
 
     @Before
     public void setUp() throws Exception {
         handler = new Handler();
         keys =  getListOfKeys(MANY);
         consumers = getListOfConsumers(MANY);
+    }
+
+    @Test
+    public void testAddHandlers0() throws Exception {
+        handler.addHandlers(keys, consumers);
+        expected = keys.size();
+        actual = 0;
+        for (String key : keys) {
+            handler.handleCollision(null, null, key);
+        }
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -38,6 +52,7 @@ public class HandlerTest {
     }
 
     public static void callBack(ICollider a, ICollider b) {
+        ++actual;
         System.out.println("I'm here now...");
     }
 
