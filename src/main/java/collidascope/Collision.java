@@ -73,6 +73,6 @@ public class Collision {
      * @return The collision key.
      */
     public String getCollisionKey() {
-        return Collider.getCollisionString(a, b);
+        return Collider.getCollisionString(b, a);
     }
 }
