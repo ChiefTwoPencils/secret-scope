@@ -1,6 +1,8 @@
 package collidascope;
 
 import collidascope.collidahandla.HandlerTest;
+import examples.Friend;
+import examples.Enemy;
 
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -33,6 +35,13 @@ public class CollidaTestUtil {
 
     public static BiConsumer<ICollider, ICollider> getRandomConsumer(){
         return HandlerTest::callBack;
+    }
+
+    public static Collision getRandomCollision() {
+        ICollider a = new Friend();
+        ICollider b = new Enemy();
+        //int priority = random.nextInt(6);
+        return new Collision(a, b);
     }
 
     public static List<BiFunction<ICollider, ICollider, Boolean>> getListOfFunctions(final int many) {
@@ -73,6 +82,14 @@ public class CollidaTestUtil {
             map.put(keys.get(i), consumers.get(i));
         }
         return map;
+    }
+
+    public static List<Collision> getListOfCollisions(final int many) {
+        List<Collision> collisions = new ArrayList<>(many);
+        for(int i = 0; i < many; i++) {
+            collisions.add(getRandomCollision());
+        }
+        return collisions;
     }
 }
 

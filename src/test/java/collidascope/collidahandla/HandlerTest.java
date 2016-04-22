@@ -1,17 +1,17 @@
 package collidascope.collidahandla;
 
+import collidascope.Collision;
 import collidascope.ICollider;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-import static collidascope.CollidaTestUtil.getListOfConsumers;
-import static collidascope.CollidaTestUtil.getListOfKeys;
-import static collidascope.CollidaTestUtil.getMapOfKeysAndConsumers;
+import static collidascope.CollidaTestUtil.*;
 
 /**
  * Created by Robert Wilk
@@ -76,7 +76,12 @@ public class HandlerTest {
 
     @Test
     public void testHandleCollisions() throws Exception {
-
+        List<Collision> list = getListOfCollisions(MANY);
+        Iterator<Collision> iter = list.iterator();
+        expected = keys.size();
+        actual = 0;
+        handler.handleCollisions(iter);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
