@@ -1,6 +1,7 @@
 package collidascope;
 
 import java.util.*;
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
 /**
@@ -28,6 +29,10 @@ public class CollidaTestUtil {
         return (a, b) -> result;
     }
 
+    public static BiConsumer<ICollider, ICollider> getRandomConsumer(){
+        return (a, b) -> System.out.println("Performing random collision response...");
+    }
+
     public static List<BiFunction<ICollider, ICollider, Boolean>> getListOfFunctions(final int many) {
         List<BiFunction<ICollider, ICollider, Boolean>> functions = new ArrayList<>(many);
         for (int i = 0; i < many; i++) {
@@ -46,6 +51,14 @@ public class CollidaTestUtil {
             map.put(keys.get(i), functions.get(i));
         }
         return map;
+    }
+
+    public static List<BiConsumer<ICollider, ICollider>> getListOfConsumers(final int many){
+        List<BiConsumer<ICollider, ICollider>> consumers = new ArrayList<>(many);
+        for (int i = 0; i < many; i++){
+            consumers.add(getRandomConsumer());
+        }
+        return consumers;
     }
 }
 
