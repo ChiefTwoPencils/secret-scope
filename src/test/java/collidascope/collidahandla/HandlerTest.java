@@ -5,10 +5,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static collidascope.CollidaTestUtil.*;
+import static collidascope.CollidaTestUtil.getListOfConsumers;
+import static collidascope.CollidaTestUtil.getListOfKeys;
 
 /**
  * Created by Robert Wilk
@@ -31,12 +31,16 @@ public class HandlerTest {
     @Test
     public void testAddHandlers() throws Exception {
         handler.addHandlers(keys, consumers);
-        for (int i = 0; i < MANY) {
+        for (int i = 0; i < MANY; i++) {
             // this is where I'm stumped
             consumers.get(i).accept(null, null);
-
         }
     }
+
+    public static void callBack(ICollider a, ICollider b) {
+        System.out.println("I'm here now...");
+    }
+
 
     @Test
     public void testAddHandlers1() throws Exception {

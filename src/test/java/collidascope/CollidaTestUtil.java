@@ -1,5 +1,7 @@
 package collidascope;
 
+import collidascope.collidahandla.HandlerTest;
+
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
@@ -30,7 +32,7 @@ public class CollidaTestUtil {
     }
 
     public static BiConsumer<ICollider, ICollider> getRandomConsumer(){
-        return (a, b) -> System.out.println("Performing random collision response...");
+        return HandlerTest::callBack;
     }
 
     public static List<BiFunction<ICollider, ICollider, Boolean>> getListOfFunctions(final int many) {
