@@ -32,6 +32,8 @@ public class ColliderTest {
     private List<String> keys;
     private List<BiConsumer<ICollider, ICollider>> consumers;
     private List<BiFunction<ICollider, ICollider, Boolean>> functions;
+    private static int expected = 0;
+    private static int actual = 0;
 
     private final int MANY = 2;
 
@@ -47,7 +49,7 @@ public class ColliderTest {
         b = new Enemy();
         collision = new Collision(a, b);
         keys.add(a.getCollisionKey() + b.getCollisionKey());
-        consumers.add(getRandomConsumer());
+        consumers.add(getColliderConsumer());
         functions.add(getRandomFunction());
         tracker.track(collision);
         collider = new Collider(keys, functions,
@@ -65,8 +67,16 @@ public class ColliderTest {
         Assert.assertSame(collision, iter.next());
     }
 
+    public static void callBack(ICollider a, ICollider b) {
+        ++actual;
+    }
+
     @Test
     public void testHandleCollision() throws Exception {
+        expected = 1;
+        actual = 0;
+        collider.handleCollision(a, b);
+        Assert.assertEquals(expected, actual);
 
     }
 

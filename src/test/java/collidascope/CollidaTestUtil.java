@@ -33,8 +33,12 @@ public class CollidaTestUtil {
         return (a, b) -> result;
     }
 
-    public static BiConsumer<ICollider, ICollider> getRandomConsumer(){
+    public static BiConsumer<ICollider, ICollider> getHandlerConsumer(){
         return HandlerTest::callBack;
+    }
+
+    public static BiConsumer<ICollider, ICollider> getColliderConsumer(){
+        return ColliderTest::callBack;
     }
 
     public static Collision getRandomCollision() {
@@ -67,7 +71,7 @@ public class CollidaTestUtil {
     public static List<BiConsumer<ICollider, ICollider>> getListOfConsumers(final int many){
         List<BiConsumer<ICollider, ICollider>> consumers = new ArrayList<>(many);
         for (int i = 0; i < many; i++){
-            consumers.add(getRandomConsumer());
+            consumers.add(getHandlerConsumer());
         }
         return consumers;
     }
