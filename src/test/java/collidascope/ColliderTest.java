@@ -63,8 +63,11 @@ public class ColliderTest {
 
     @Test
     public void testTrackCollision() throws Exception {
-        Iterator<Collision> iter = tracker.iterator();
-        Assert.assertSame(collision, iter.next());
+        collider.trackCollision(collision);
+        expected = 1;
+        actual = 0;
+        collider.handleCollisions();
+        Assert.assertSame(expected, actual);
     }
 
     public static void callBack(ICollider a, ICollider b) {
