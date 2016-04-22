@@ -113,7 +113,7 @@ public class ColliderTest {
     public void testAddHandlers1() throws Exception {
         collider = new Collider();
         collider.addDetectors(keys, functions);
-        collider.addHandlers(keys, consumers);
+        collider.addHandlers(consumerMap);
         collider.trackCollision(collision);
         expected = 1;
         actual = 0;
@@ -123,16 +123,30 @@ public class ColliderTest {
 
     @Test
     public void testAddDetectors() throws Exception {
-
+        collider = new Collider();
+        collider.addDetectors(keys, functions);
+        collider.addHandlers(keys, consumers);
+        collider.trackCollision(collision);
+        expected = 1;
+        actual = 0;
+        collider.handleCollisions();
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void testAddDetectors1() throws Exception {
-
+        collider = new Collider();
+        collider.addDetectors(functionMap);
+        collider.addHandlers(keys, consumers);
+        collider.trackCollision(collision);
+        expected = 1;
+        actual = 0;
+        collider.handleCollisions();
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void testGetCollisionString() throws Exception {
-
+        Assert.assertEquals(a.getCollisionKey() + b.getCollisionKey(), Collider.getCollisionString(a, b));
     }
 }
