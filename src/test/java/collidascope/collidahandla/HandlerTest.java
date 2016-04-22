@@ -6,10 +6,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiConsumer;
 
 import static collidascope.CollidaTestUtil.getListOfConsumers;
 import static collidascope.CollidaTestUtil.getListOfKeys;
+import static collidascope.CollidaTestUtil.getMapOfKeysAndConsumers;
 
 /**
  * Created by Robert Wilk
@@ -42,24 +44,23 @@ public class HandlerTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void testAddHandlers() throws Exception {
-        handler.addHandlers(keys, consumers);
-        for (int i = 0; i < MANY; i++) {
-            // this is where I'm stumped
-            consumers.get(i).accept(null, null);
-        }
-    }
-
     public static void callBack(ICollider a, ICollider b) {
         ++actual;
-        System.out.println("I'm here now...");
+        System.out.println("I'm here now..." + actual);
     }
 
 
     @Test
     public void testAddHandlers1() throws Exception {
-
+        Map<String, BiConsumer<ICollider, ICollider>> map =
+                getMapOfKeysAndConsumers(keys, consumers, MANY);
+        handler.addHandlers(map);
+        expected = keys.size();
+        actual = 0;
+        for (String key : keys) {
+            handler.handleCollision(null, null, key);
+        }
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -69,6 +70,11 @@ public class HandlerTest {
 
     @Test
     public void testHandleCollisions() throws Exception {
+
+    }
+
+    @Test
+    public void testHandleCollisionWithBadKey() {
 
     }
 }

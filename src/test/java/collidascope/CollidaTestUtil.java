@@ -62,5 +62,17 @@ public class CollidaTestUtil {
         }
         return consumers;
     }
+
+    public static Map<String, BiConsumer<ICollider, ICollider>>
+    getMapOfKeysAndConsumers(
+            final List<String> keys,
+            final List<BiConsumer<ICollider, ICollider>> consumers,
+            final int many) {
+        Map<String, BiConsumer<ICollider, ICollider>> map = new HashMap<>(many);
+        for (int i = 0; i < many; i++){
+            map.put(keys.get(i), consumers.get(i));
+        }
+        return map;
+    }
 }
 
