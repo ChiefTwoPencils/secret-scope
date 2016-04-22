@@ -53,6 +53,7 @@ public class ColliderTest {
         collider = new Collider();
         collider.addDetectors(keys, functions);
         collider.addHandlers(keys, consumers);
+        collider.trackCollision(collision);
         Assert.assertSame(functions.get(0).apply(a, b), collider.detectedCollision(a, b));
     }
 
@@ -77,6 +78,7 @@ public class ColliderTest {
         collider = new Collider();
         collider.addDetectors(keys, functions);
         collider.addHandlers(keys, consumers);
+        collider.trackCollision(collision);
         expected = 1;
         actual = 0;
         collider.handleCollision(a, b);
@@ -88,6 +90,7 @@ public class ColliderTest {
         collider = new Collider();
         collider.addDetectors(keys, functions);
         collider.addHandlers(keys, consumers);
+        collider.trackCollision(collision);
         expected = 1;
         actual = 0;
         collider.handleCollisions();
@@ -99,6 +102,7 @@ public class ColliderTest {
         collider = new Collider();
         collider.addDetectors(keys, functions);
         collider.addHandlers(keys, consumers);
+        collider.trackCollision(collision);
         expected = 1;
         actual = 0;
         collider.handleCollisions();
@@ -110,6 +114,7 @@ public class ColliderTest {
         collider = new Collider();
         collider.addDetectors(keys, functions);
         collider.addHandlers(keys, consumers);
+        collider.trackCollision(collision);
         expected = 1;
         actual = 0;
         collider.handleCollisions();
