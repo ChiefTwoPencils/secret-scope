@@ -65,7 +65,13 @@ public class HandlerTest {
 
     @Test
     public void testHandleCollision() throws Exception {
-
+        handler.addHandlers(getMapOfKeysAndConsumers(keys, consumers, MANY));
+        expected = keys.size();
+        actual = 0;
+        for( int i = 0; i < MANY; i++) {
+            handler.handleCollision(null, null, keys.get(i));
+        }
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -75,6 +81,10 @@ public class HandlerTest {
 
     @Test
     public void testHandleCollisionWithBadKey() {
-
+        handler.addHandlers(getMapOfKeysAndConsumers(keys, consumers, MANY));
+        expected = keys.size();
+        actual = 0;
+        handler.handleCollision(null, null, "BadKey");
+        Assert.assertFalse(expected == actual);
     }
 }
