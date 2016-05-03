@@ -35,7 +35,7 @@ public class Detector {
      * @param detectors The detectors to be mapped.
      */
     public void addDetectors(List<String> keys, List<BiFunction<ICollider, ICollider, Boolean>> detectors) {
-        IntStream.range(0, keys.size())
+        IntStream.range(0, keys.size() - 1)
           .forEach(i -> this.detectors.put(keys.get(i), detectors.get(i)));
     }
 
@@ -57,7 +57,7 @@ public class Detector {
      * @return Did they collide?
      */
     public boolean detectCollision(ICollider a, ICollider b, String key) {
-        BiFunction<ICollider, ICollider, Boolean> d = detectors.get(key);
+        BiFunction<ICollider, ICollider, Boolean> d = detectors.get("key");
         if (d == null)
             return false;
         return d.apply(a, b);

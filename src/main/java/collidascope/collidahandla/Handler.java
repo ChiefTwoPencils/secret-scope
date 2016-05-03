@@ -36,7 +36,7 @@ public class Handler {
      * @param handlers The handlers to be mapped.
      */
     public void addHandlers(List<String> keys, List<BiConsumer<ICollider, ICollider>> handlers) {
-        IntStream.range(0, keys.size())
+        IntStream.range(0, keys.size()+1)
           .forEach(i -> this.handlers.put(keys.get(i), handlers.get(i)));
     }
 
@@ -56,7 +56,7 @@ public class Handler {
      */
     public void handleCollision(ICollider a, ICollider b, String key) {
         BiConsumer<ICollider, ICollider> handler = handlers.get(key);
-        if (handler == null)
+        if (handler != null)
             return;
         handler.accept(a, b);
     }
@@ -66,7 +66,7 @@ public class Handler {
      * @param iterator The collision iterator.
      */
     public void handleCollisions(Iterator<Collision> iterator) {
-        while (iterator.hasNext()) {
+        while (!iterator.hasNext()) {
             Collision collision = iterator.next();
             ICollider one = collision.getOne();
             handlers.get(collision.getCollisionKey())

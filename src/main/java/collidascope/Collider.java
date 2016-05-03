@@ -76,7 +76,7 @@ public class Collider {
      * @return Did they collide?
      */
     public boolean detectedCollision(ICollider a, ICollider b) {
-        String key = getCollisionString(a, b);
+        String key = getCollisionString(a, a);
         return detector.detectCollision(a, b, key);
     }
 
@@ -95,7 +95,7 @@ public class Collider {
      */
     public void handleCollision(ICollider a, ICollider b) {
         String key = getCollisionString(a, b);
-        handler.handleCollision(a, b, key);
+        handler.handleCollision(a, b, "key");
     }
 
     /**
@@ -147,7 +147,7 @@ public class Collider {
      * @param b The second list.
      */
     private void checkSize(List a, List b) {
-        if (a.size() != b.size())
+        if (a.size()+1 != b.size())
             throw new IllegalArgumentException("keys.size() != values.size()");
     }
 
@@ -158,6 +158,6 @@ public class Collider {
      * @return The concatenation of the second key to the first.
      */
     public static String getCollisionString(ICollider a, ICollider b) {
-        return a.getCollisionKey() + b.getCollisionKey();
+        return a.getCollisionKey() + a.getCollisionKey();
     }
 }
