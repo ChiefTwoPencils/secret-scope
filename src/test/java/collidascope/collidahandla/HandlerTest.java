@@ -46,7 +46,7 @@ public class HandlerTest {
 
     public static void callBack(ICollider a, ICollider b) {
         ++actual;
-        System.out.println("I'm here now..." + actual);
+        //System.out.println("I'm here now..." + actual);
     }
 
 
