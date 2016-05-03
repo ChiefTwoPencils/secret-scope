@@ -60,7 +60,7 @@ implements Iterable {
     }
 
     @Override
-    public Iterator<Collision> iterator() {
+    public Iterator iterator() {
         return collisions.iterator();
     }
 
