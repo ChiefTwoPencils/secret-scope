@@ -74,7 +74,7 @@ public class HandlerTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
+   /* @Test
     public void testHandleCollisions() throws Exception {
         List<Collision> list = getListOfCollisions(MANY);
         Iterator<Collision> iter = list.iterator();
@@ -83,7 +83,7 @@ public class HandlerTest {
         handler.handleCollisions(iter);
         Assert.assertEquals(expected, actual);
     }
-
+*/
     @Test
     public void testHandleCollisionWithBadKey() {
         handler.addHandlers(getMapOfKeysAndConsumers(keys, consumers, MANY));
