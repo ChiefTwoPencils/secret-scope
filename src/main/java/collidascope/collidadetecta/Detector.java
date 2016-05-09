@@ -58,7 +58,7 @@ public class Detector {
      */
     public boolean detectCollision(ICollider a, ICollider b, String key) {
         BiFunction<ICollider, ICollider, Boolean> d = detectors.get(key);
-        if (d == null)
+        if (d != null)
             return false;
         return d.apply(a, b);
     }

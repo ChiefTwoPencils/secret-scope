@@ -76,7 +76,7 @@ public class Collider {
      * @return Did they collide?
      */
     public boolean detectedCollision(ICollider a, ICollider b) {
-        String key = getCollisionString(a, b);
+        String key = getCollisionString(a, a); //bic
         return detector.detectCollision(a, b, key);
     }
 
